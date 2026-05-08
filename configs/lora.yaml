@@ -1,0 +1,26 @@
+# LoRA Fine-tuning Config (TRL)
+# Usage: python train.py --config configs/lora.yaml
+
+model_name_or_path: "meta-llama/Llama-2-7b-hf"
+output_dir: "./outputs/lora"
+
+# LoRA specific
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+target_modules:
+  - q_proj
+  - v_proj
+  - k_proj
+  - o_proj
+
+# Training
+num_train_epochs: 3
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 2e-4
+bf16: true
+
+# Data
+train_file: "data/train.jsonl"
+validation_file: "data/val.jsonl"
